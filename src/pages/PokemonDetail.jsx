@@ -1,38 +1,47 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-function PokemonDetail({
-  pokemons,
-}) {
+function PokemonDetail() {
   const { pokemonName } = useParams();
 
-  const [pokemonDetail, setPokemonDetail] =
-    useState(null);
-
-  const pokemon = pokemons.find(
-    (pokemon) =>
-      pokemon.name === pokemonName
-  );
+  const [result, setResult] = useState(null);
+  const pokemonDetail = result?.name === pokemonName ? result.data : null;
+  const error = result?.name === pokemonName ? result.error : null;
 
   useEffect(() => {
-    if (!pokemon) {
-      return;
-    }
+    const controller = new AbortController();
 
-    // detail data ophalen via url uit de api
-    fetch(pokemon.url)
-      .then((res) => res.json())
+    // detail data ophalen met de naam uit de route
+    fetch(`https://pokeapi.co/api/v2/pokemon/${encodeURIComponent(pokemonName)}`, {
+      signal: controller.signal,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.status === 404
+            ? "Pokemon niet gevonden"
+            : "Pokemon kon niet worden geladen. Probeer het later opnieuw.");
+        }
+        return res.json();
+      })
       .then((data) => {
-        console.log(data);
-
-        setPokemonDetail(data);
+        setResult({ name: pokemonName, data, error: null });
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          setResult({ name: pokemonName, data: null,
+            error: error instanceof TypeError
+              ? "Pokemon laden mislukt. Controleer je internetverbinding en probeer opnieuw."
+              : error.message });
+        }
       });
-  }, [pokemon]);
 
-  if (!pokemon) {
+    return () => controller.abort();
+  }, [pokemonName]);
+
+  if (error) {
     return (
       <section className="pokemonDetail">
-        <h2>Pokemon niet gevonden</h2>
+        <h2 role="alert">{error}</h2>
 
         <Link
           to="/pokemon"
@@ -47,7 +56,7 @@ function PokemonDetail({
   if (!pokemonDetail) {
     return (
       <section className="pokemonDetail">
-        <h2>Pokemon laden...</h2>
+        <h2 role="status">Pokemon laden...</h2>
       </section>
     );
   }

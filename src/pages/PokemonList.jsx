@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PokemonApiList from "../components/PokemonApiList";
 import PokemonCard from "../components/PokemonCard";
 
@@ -5,7 +6,13 @@ function PokemonList({
   pokemons,
   addPokemon,
   deletePokemon,
+  toggleFavorite,
 }) {
+  const [onlyFavorites, setOnlyFavorites] = useState(false);
+  const visiblePokemons = onlyFavorites
+    ? pokemons.filter((pokemon) => pokemon.isFavorite)
+    : pokemons;
+
   return (
     <section className="pokemonPage">
       <h2>Pokemon</h2>
@@ -25,14 +32,24 @@ function PokemonList({
         Mijn Pokemon
       </h3>
 
-      {pokemons.length === 0 && (
+      <p>Markeer je favoriete Pokemon met een ster. Je kunt ze daarna snel terugvinden met het filter.</p>
+      <label>
+        <input
+          type="checkbox"
+          checked={onlyFavorites}
+          onChange={(event) => setOnlyFavorites(event.target.checked)}
+        />{" "}
+        Alleen favorieten tonen
+      </label>
+
+      {visiblePokemons.length === 0 && (
         <p>
-          Je hebt nog geen Pokemon toegevoegd.
+          {onlyFavorites ? "Je hebt nog geen favoriete Pokemon." : "Je hebt nog geen Pokemon toegevoegd."}
         </p>
       )}
 
       <div className="pokemonGrid">
-        {pokemons.map((pokemon) => (
+        {visiblePokemons.map((pokemon) => (
           <div
             className="pokemonManageItem"
             key={pokemon.name}
@@ -40,6 +57,15 @@ function PokemonList({
             <PokemonCard
               pokemon={pokemon}
             />
+
+            <button
+              className="smallButton"
+              aria-pressed={Boolean(pokemon.isFavorite)}
+              aria-label={`${pokemon.name} ${pokemon.isFavorite ? "uit favorieten verwijderen" : "als favoriet markeren"}`}
+              onClick={() => toggleFavorite(pokemon.name)}
+            >
+              {pokemon.isFavorite ? "★ Favoriet" : "☆ Maak favoriet"}
+            </button>
 
             <button
               className="deleteSmallButton"

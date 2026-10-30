@@ -61,6 +61,16 @@ function App() {
     );
   }
 
+  function toggleFavorite(name) {
+    setPokemons((currentPokemons) =>
+      currentPokemons.map((pokemon) =>
+        pokemon.name === name
+          ? { ...pokemon, isFavorite: !pokemon.isFavorite }
+          : pokemon
+      )
+    );
+  }
+
   function addTeam(name) {
     const newTeam = {
       id: Date.now(),
@@ -166,6 +176,7 @@ function App() {
                   pokemons={pokemons}
                   addPokemon={addPokemon}
                   deletePokemon={deletePokemon}
+                  toggleFavorite={toggleFavorite}
                 />
               }
             />
@@ -173,9 +184,7 @@ function App() {
             <Route
               path="/pokemon/:pokemonName"
               element={
-                <PokemonDetail
-                  pokemons={pokemons}
-                />
+                <PokemonDetail />
               }
             />
           </Routes>
