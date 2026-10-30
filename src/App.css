@@ -1,0 +1,445 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fa;
+  color: #20232a;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: #e63946;
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 2px;
+}
+
+.navigation {
+  height: 65px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.navigation a {
+  text-decoration: none;
+  color: #20232a;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.navigation a:hover {
+  color: #e63946;
+}
+
+.main {
+  flex: 1;
+}
+
+.hero {
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero h2 {
+  font-size: 38px;
+  margin: 25px 0 10px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #666666;
+  margin-bottom: 30px;
+}
+
+.mainButton {
+  border: none;
+  background: #e63946;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.mainButton:hover {
+  background: #c92f3b;
+}
+
+.smallButton {
+  text-decoration: none;
+  border: none;
+  background: #e63946;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.pokeball {
+  position: relative;
+  width: 115px;
+  height: 115px;
+  border: 6px solid #20232a;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    #e63946 0%,
+    #e63946 46%,
+    white 46%,
+    white 54%,
+    white 100%
+  );
+}
+
+.pokeballLine {
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  background: #20232a;
+  top: 49px;
+}
+
+.pokeballCircle {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 6px solid #20232a;
+  border-radius: 50%;
+  left: 35px;
+  top: 35px;
+}
+
+.info {
+  background: white;
+  padding: 55px 40px 70px;
+  text-align: center;
+}
+
+.info h2 {
+  margin-top: 0;
+  margin-bottom: 35px;
+  font-size: 28px;
+}
+
+.cards {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  gap: 25px;
+}
+
+.card {
+  flex: 1;
+  background: #f7f7f7;
+  border: 1px solid #e2e2e2;
+  border-radius: 12px;
+  padding: 30px 20px;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  color: #666666;
+  line-height: 1.5;
+}
+
+.teamList,
+.detailPage,
+.pokemonPage,
+.pokemonDetail {
+  min-height: 650px;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.teamList h2,
+.detailPage h2,
+.pokemonPage h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.pageIntro {
+  color: #666666;
+  margin-bottom: 35px;
+}
+
+.teamCards {
+  width: 900px;
+  max-width: 100%;
+  margin: 0 auto 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.teamCard {
+  background: white;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  padding: 22px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.teamCard h3 {
+  margin: 0;
+}
+
+.teamCard p {
+  margin: 8px 0 0;
+  color: #666666;
+}
+
+.cardActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pokemonGrid {
+  max-width: 950px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.pokemonCard {
+  background: white;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.pokemonCard h3 {
+  margin: 0;
+}
+
+.pokemonCard p {
+  margin: 0;
+  color: #666666;
+}
+
+.pokemonPlaceholder {
+  width: 80px;
+  height: 80px;
+  background: #eeeeee;
+  border-radius: 50%;
+  margin: 0 auto 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  color: #777777;
+}
+
+.bigPokemonPlaceholder {
+  width: 150px;
+  height: 150px;
+  background: #eeeeee;
+  border: 3px solid #dddddd;
+  border-radius: 50%;
+  margin: 0 auto 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 28px;
+  font-weight: bold;
+  color: #777777;
+}
+
+.pokemonInfo {
+  width: 350px;
+  max-width: 100%;
+  margin: 0 auto 35px;
+  background: white;
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.createForm {
+  max-width: 700px;
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.createForm input,
+.addPokemonBox select {
+  padding: 13px 15px;
+  border: 1px solid #cccccc;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+.pokemonForm {
+  flex-wrap: wrap;
+}
+
+.addPokemonBox {
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.deleteSmallButton {
+  border: 1px solid #e63946;
+  background: white;
+  color: #e63946;
+  padding: 10px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.deleteSmallButton:hover {
+  background: #e63946;
+  color: white;
+}
+
+.pokemonManageItem {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer {
+  background: #20232a;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .navigation {
+    gap: 25px;
+  }
+
+  .hero h2 {
+    font-size: 30px;
+  }
+
+  .cards {
+    flex-direction: column;
+  }
+
+  .pokemonGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .createForm {
+    flex-direction: column;
+  }
+
+  .addPokemonBox {
+    flex-direction: column;
+  }
+
+  .teamCard {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cardActions {
+    flex-direction: column;
+  }
+}
+
+.apiPokemonList {
+  max-width: 950px;
+  margin: 30px auto 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.apiPokemonCard {
+  background: white;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.apiPokemonCard h3 {
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+.apiPokemonCard button:disabled {
+  background: #bbbbbb;
+  cursor: default;
+}
+
+.myPokemonTitle {
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+.pokemonCard h3 {
+  text-transform: capitalize;
+}
+
+.pokemonImage {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 900px) {
+  .apiPokemonList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .apiPokemonList {
+    grid-template-columns: 1fr;
+  }
+}
